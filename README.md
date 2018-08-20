@@ -1,1 +1,1 @@
-# recipe-directory
+# Recipe Directory
