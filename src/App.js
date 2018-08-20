@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Form from "./components/Form";
+import Recipes from "./components/Recipes";
 
 const API_KEY = "c45ac00e75670f133f58855a5e78629b";
 
@@ -19,17 +20,13 @@ class App extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="App container">
         <header className="App-header">
           <h1 className="App-title">Recipe Search</h1>
-          <Form recipe={this.state.recipes} getRecipes={this.getRecipes} />
         </header>
         <div>
-          <ul>
-            {this.state.recipes.map(recipe => {
-              return <li key={recipe.recipe_id}>{recipe.title}</li>;
-            })}
-          </ul>
+          <Form recipe={this.state.recipes} getRecipes={this.getRecipes} />
+          <Recipes recipes={this.state.recipes} />
         </div>
       </div>
     );
