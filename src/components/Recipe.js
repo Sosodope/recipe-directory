@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
 const API_KEY = "c45ac00e75670f133f58855a5e78629b";
 
 class Recipe extends Component {
   state = {
-    activeRecipe: []
+    activeRecipe: [],
+    loading: true
   };
   componentDidMount = async () => {
     const title = this.props.location.state.recipe;
@@ -13,13 +15,15 @@ class Recipe extends Component {
       `https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=${title}`
     );
     const res = await req.json();
-    this.setState({ activeRecipe: res.recipes[0] });
+    this.setState({ activeRecipe: res.recipes[0], loading: false });
   };
   render() {
     const recipe = this.state.activeRecipe;
     return (
       <div className="container">
-        {this.state.activeRecipe.length !== 0 && (
+        {this.state.loading ? (
+          <Loading />
+        ) : (
           <div className="active-recipe">
             <img
               className="active-recipe__img"
